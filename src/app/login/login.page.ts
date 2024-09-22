@@ -11,7 +11,7 @@ export class LoginPage implements OnInit {
 
   @ViewChild('title', { read: ElementRef, static: true }) title!: ElementRef;
 
-  message!: string;
+  message: string = "Inicio de Sesión";
   username!: string;
   password!: string;
 
