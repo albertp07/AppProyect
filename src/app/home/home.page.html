@@ -1,0 +1,77 @@
+<ion-content>
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <div class="header">
+        <ion-title #title class="duoc"><span class="yellow">Duoc</span><span class="blue">Uc</span></ion-title>
+        <ion-icon name="person-circle-outline" class="icon-title"></ion-icon>
+      </div>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title class="ion-text-center">Bienvenido</ion-card-title>
+      <ion-card-subtitle class="ion-text-center">Registro de Asistencia</ion-card-subtitle>
+    </ion-card-header>
+  
+    <ion-card-content>
+      <p class="p-card-1">Hola! Estas en la app de registro de Asistencia DuocUc, 
+        selecciona alguna de las opciones de abajo para realizar cualquier consulta sobre tu asistencia.</p>
+    </ion-card-content>
+  </ion-card>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col size="6">
+          <ion-button expand="block" class="option">
+            <ion-icon name="calendar-outline" slot="start"></ion-icon>
+            Asistencias
+          </ion-button>
+        </ion-col>
+        <ion-col size="6">
+          <ion-button expand="block" class="option">
+            <ion-icon name="refresh-outline" slot="start"></ion-icon>
+            Historial de Clases
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="6">
+          <ion-button expand="block" class="option">
+            <ion-icon name="calendar-outline" slot="start"></ion-icon>
+            ComingSoon
+          </ion-button>
+        </ion-col>
+        <ion-col size="6">
+          <ion-button expand="block" class="option">
+            <ion-icon name="refresh-outline" slot="start"></ion-icon>
+            ComingSoon
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="6">
+          <ion-button expand="block" class="option">
+            <ion-icon name="calendar-outline" slot="start"></ion-icon>
+            ComingSoon
+          </ion-button>
+        </ion-col>
+        <ion-col size="6">
+          <ion-button expand="block" class="option" [routerLink]="['/login']">
+            Salir
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+  <ion-button class="register">
+    <ion-icon slot="start" name="person-add-outline" class="icon"></ion-icon>
+    <p class="reg-as">Registrar Asistencia</p>
+    <ion-icon slot="end" name="qr-code-outline"></ion-icon>
+  </ion-button>
+
+</ion-content>

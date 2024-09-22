@@ -1,0 +1,65 @@
+#container {
+  text-align: center;
+
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+#container strong {
+  font-size: 20px;
+  line-height: 26px;
+}
+
+#container p {
+  font-size: 16px;
+  line-height: 22px;
+
+  color: #8c8c8c;
+
+  margin: 0;
+}
+
+#container a {
+  text-decoration: none;
+}
+.yellow{
+  color: yellow;
+}
+.blue{
+  color: blue;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin: 15px 10px;
+}
+.duoc {
+  font-size: 35px;
+}
+.icon-title {
+  font-size: 35px;
+}
+.p-card-1{
+  font-size: 20px;
+  text-align: justify;
+  color: #fff;
+}
+ion-card{
+  background: #63636330;
+}
+.reg-as{
+  font-size: 20px;
+}
+.icon{
+  font-size: 20px;
+}
+.register{
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+  height: 60px;
+  margin-left: 0px;
+}

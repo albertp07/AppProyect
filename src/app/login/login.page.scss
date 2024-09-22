@@ -1,0 +1,30 @@
+.register{
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+    height: 60px;
+    margin-left: 0px;
+}
+.yellow{
+    color: yellow;
+}
+.blue{
+    color: blue;
+}
+.header {
+    display: flex;
+    justify-content: space-between;
+    margin: 15px 10px;
+}
+.duoc {
+    font-size: 35px;
+}
+.icon-title {
+    font-size: 35px;
+}
+.center-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60%;
+}

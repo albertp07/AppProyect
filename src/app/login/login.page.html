@@ -1,0 +1,44 @@
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large" class="icon-title">login</ion-title>
+      <div class="header">
+        <ion-title #title class="duoc"><span class="yellow">Duoc</span><span class="blue">Uc</span></ion-title>
+      </div>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="center-form">
+    <div>
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title class="ion-text-center">Inicio de Sesión</ion-card-title>
+        </ion-card-header>
+      
+        <ion-card-content>
+          <ion-list>
+    
+            <ion-item>
+              <ion-input label="RUT" labelPlacement="floating" [(ngModel)]="username" placeholder="Username"></ion-input>
+              <ion-icon name="person-circle-outline" spot="start"></ion-icon>
+            </ion-item>
+    
+            <ion-item>
+              <ion-input type="password" label="Contraseña" labelPlacement="floating" [(ngModel)]="password" placeholder="clave"></ion-input>
+              <ion-icon name="lock-closed-outline"></ion-icon>
+            </ion-item>
+    
+          </ion-list>
+    
+          <ion-col>
+            <ion-button expand="block" (click)="validateLogin()">
+              <ion-icon name="log-in-outline" spot="start"></ion-icon>
+            </ion-button> 
+        </ion-col>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+
+
+</ion-content>
