@@ -8,6 +8,7 @@ import { AnimationController } from '@ionic/angular';
 })
 export class HomePage {
   @ViewChild('title', { read: ElementRef, static: true }) title!: ElementRef;
+  usuario: string = 'Albert';
 
   constructor(private animationCtrl: AnimationController) {}
 
