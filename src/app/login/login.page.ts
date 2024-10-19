@@ -25,6 +25,10 @@ export class LoginPage implements OnInit {
     console.log('ngOnInit se ejecuta una vez');
   }
 
+  forgotPassword() {
+    this.router.navigate(['/forgot-password']);
+  }
+
   async validateLogin(){
     const rut: string = '29678098';
     const clave: string = 'albertp';
