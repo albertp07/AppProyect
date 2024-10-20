@@ -1,5 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { AnimationController, ToastController } from '@ionic/angular';
+import { AnimationController } from '@ionic/angular';
 import { Router } from '@angular/router';
 
 
@@ -13,7 +13,6 @@ export class ForgotPasswordPage  {
   @ViewChild('title', { read: ElementRef, static: true }) title!: ElementRef;
 
   constructor(
-    private toastController: ToastController,
     private router: Router,
     private animationCtrl: AnimationController
   ) { }

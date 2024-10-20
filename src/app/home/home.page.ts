@@ -43,4 +43,8 @@ export class HomePage {
     await this.presentToast();
     this.router.navigate(['/login']);
   }
+
+  goToLista(){
+    this.router.navigate(['/lista'])
+  }
 }
