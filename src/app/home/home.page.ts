@@ -1,5 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { AnimationController, ToastController } from '@ionic/angular';
+import { AnimationController, ToastController, AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 
 @Component({
@@ -14,7 +14,8 @@ export class HomePage {
   constructor(
     private animationCtrl: AnimationController, 
     private toastController: ToastController, 
-    private router: Router
+    private router: Router,
+    private alertController: AlertController
   ) {}
 
   ngAfterViewInit() {
@@ -47,4 +48,29 @@ export class HomePage {
   goToLista(){
     this.router.navigate(['/lista'])
   }
+
+  async presentLogoutConfirm() {
+    const alert = await this.alertController.create({
+      header: 'Cerrar Sesión',
+      message: '¿Estás seguro de que deseas salir?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: () => {
+            console.log('Salida cancelada');
+          }
+        },
+        {
+          text: 'Salir',
+          handler: () => {
+            this.goToLogin();
+          }
+        }
+      ]
+    });
+  
+    await alert.present();
+  }
+  
 }
