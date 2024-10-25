@@ -9,12 +9,12 @@ import { JsonplaceholderService } from '../services/jsonplaceholder.service';
   styleUrls: ['./lista.page.scss'],
 })
 export class ListaPage  {
-  @ViewChild(IonContent, { static: false }) content!: IonContent; // Agrega una referencia a IonContent
+  @ViewChild(IonContent, { static: false }) content!: IonContent;
 
   people: any[] = [];
-  currentPage: number = 1; // Página actual
-  itemsPerPage: number = 10; // Número de elementos por página
-  paginatedPeople: any[] = []; // Array para almacenar los datos de la página actual
+  currentPage: number = 1;
+  itemsPerPage: number = 10;
+  paginatedPeople: any[] = [];
 
 
   @ViewChild('title', { read: ElementRef, static: true }) title!: ElementRef;
@@ -42,19 +42,17 @@ export class ListaPage  {
   }
 
   ngOnInit() {
-    // Llamar al método del servicio para obtener las publicaciones
     this.jsonPlaceholderService.getPosts().subscribe(
       (data) => {
-        console.log('Datos recibidos:', data); // Agrega esta línea
-        // Aquí transformamos los datos para simular las personas con los campos deseados
+        console.log('Datos recibidos:', data);
         this.people = data.map((item: any) => ({
           id: item.id,
-          firstName: `Nombre ${item.id}`, // Simulamos el nombre
-          lastName: `Apellido ${item.id}`, // Simulamos el apellido
+          firstName: `Nombre ${item.id}`,
+          lastName: `Apellido ${item.id}`,
           country: 'País Simulado', // Simulamos el país
-          age: Math.floor(Math.random() * (50 - 20 + 1)) + 20 // Edad aleatoria entre 20 y 50
+          age: Math.floor(Math.random() * (50 - 20 + 1)) + 20
         }));
-        this.updatePage(); // Actualizamos la vista de la primera página
+        this.updatePage();
       },
       (error) => {
         console.error('Error al obtener las publicaciones', error);
@@ -62,14 +60,12 @@ export class ListaPage  {
     );
   }
 
-  // Actualizar la lista visible según la página actual
   updatePage() {
     const startIndex = (this.currentPage - 1) * this.itemsPerPage;
     const endIndex = startIndex + this.itemsPerPage;
     this.paginatedPeople = this.people.slice(startIndex, endIndex);
   }
 
-  // Ir a la página siguiente
   nextPage() {
     if (this.currentPage * this.itemsPerPage < this.people.length) {
       this.currentPage++;
@@ -78,7 +74,6 @@ export class ListaPage  {
     }
   }
 
-  // Ir a la página anterior
   prevPage() {
     if (this.currentPage > 1) {
       this.currentPage--;
