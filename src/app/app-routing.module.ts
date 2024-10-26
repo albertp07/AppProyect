@@ -27,6 +27,14 @@ const routes: Routes = [
     loadChildren: () => import('./lista/lista.module').then( m => m.ListaPageModule),
     canActivate: [AuthGuard]
   },
+  {
+    path: 'not-found',
+    loadChildren: () => import('./not-found/not-found.module').then( m => m.NotFoundPageModule)
+  },
+  {
+    path: '**',
+    redirectTo: 'not-found'
+  }
 
 ];
 
