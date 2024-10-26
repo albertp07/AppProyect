@@ -1,6 +1,8 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { AnimationController, ToastController } from '@ionic/angular';
+import { AuthService } from '../services/auth.service'; 
+
 
 @Component({
   selector: 'app-login',
@@ -18,7 +20,8 @@ export class LoginPage implements OnInit {
   constructor(
     private toastController: ToastController,
     private router: Router,
-    private animationCtrl: AnimationController
+    private animationCtrl: AnimationController,
+    private authService: AuthService
   ) {   }
 
   ngOnInit() {
@@ -30,10 +33,9 @@ export class LoginPage implements OnInit {
   }
 
   async validateLogin(){
-    const rut: string = '29678098';
-    const clave: string = 'albertp';
+    const isAuthenticated = this.authService.login(this.username, this.password);
 
-    if(rut === this.username && clave === this.password){
+    if(isAuthenticated){
       this.showToastMessage('Bienvenido', 'success')
       const extras: NavigationExtras = {
         state: {
