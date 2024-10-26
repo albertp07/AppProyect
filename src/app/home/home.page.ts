@@ -1,6 +1,7 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { AnimationController, ToastController, AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -15,7 +16,8 @@ export class HomePage {
     private animationCtrl: AnimationController, 
     private toastController: ToastController, 
     private router: Router,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private authService: AuthService
   ) {}
 
   ngAfterViewInit() {
