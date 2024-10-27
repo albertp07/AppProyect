@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { AnimationController, ToastController } from '@ionic/angular';
 import { AuthService } from '../services/auth.service'; 
+import { StorageService } from '../services/storage.service';
 
 
 @Component({
@@ -21,7 +22,8 @@ export class LoginPage implements OnInit {
     private toastController: ToastController,
     private router: Router,
     private animationCtrl: AnimationController,
-    private authService: AuthService
+    private authService: AuthService,
+    private storageService: StorageService
   ) {   }
 
   ngOnInit() {
@@ -37,13 +39,10 @@ export class LoginPage implements OnInit {
 
     if(isAuthenticated){
       this.showToastMessage('Bienvenido', 'success')
-      const extras: NavigationExtras = {
-        state: {
-          username: this.username
-        }
-      }
 
-      this.router.navigate(['/home'], extras)
+      await this.storageService.set('usuario', this.username);
+      
+      this.router.navigate(['/home']);
     }else{
       this.showToastMessage('Credenciales Incorrectas', 'danger')
     }

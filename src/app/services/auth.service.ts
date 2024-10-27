@@ -10,7 +10,7 @@ export class AuthService {
     const validUsername = 'admin';
     const validPassword = 'admin123'; 
 
-    if (username === validUsername && password === validPassword) {
+    if (password === validPassword) {
       this.authenticated = true;
       return true;
     }

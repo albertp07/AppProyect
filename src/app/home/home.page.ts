@@ -1,7 +1,8 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild, OnInit } from '@angular/core';
 import { AnimationController, ToastController, AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import { StorageService } from '../services/storage.service'
 
 @Component({
   selector: 'app-home',
@@ -10,15 +11,31 @@ import { AuthService } from '../services/auth.service';
 })
 export class HomePage {
   @ViewChild('title', { read: ElementRef, static: true }) title!: ElementRef;
-  usuario: string = 'Albert';
+  usuario: string = '';
 
   constructor(
     private animationCtrl: AnimationController, 
     private toastController: ToastController, 
     private router: Router,
     private alertController: AlertController,
-    private authService: AuthService
+    private authService: AuthService,
+    private storageService: StorageService
   ) {}
+
+  async ngOnInit() {
+
+    const usuarioGuardado = await this.storageService.get('usuario');
+
+    if(usuarioGuardado){
+      this.usuario = usuarioGuardado
+    }
+  }
+
+  async logout() {
+    await this.storageService.clear();
+    console.log('Datos limpiados y usuario deslogueado');
+  }
+
 
   ngAfterViewInit() {
     const animation = this.animationCtrl
@@ -65,7 +82,8 @@ export class HomePage {
         },
         {
           text: 'Salir',
-          handler: () => {
+          handler: async () => {
+            await this.authService.logout();
             this.goToLogin();
           }
         }
@@ -74,5 +92,6 @@ export class HomePage {
   
     await alert.present();
   }
+  
   
 }
