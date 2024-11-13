@@ -2,12 +2,14 @@ import { Component, ElementRef, ViewChild, OnInit } from '@angular/core';
 import { AnimationController, ToastController, AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
-import { StorageService } from '../services/storage.service'
+import { StorageService } from '../services/storage.service';
+import { BarcodeScanner } from '@awesome-cordova-plugins/barcode-scanner/ngx';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
+  providers: [BarcodeScanner]
 })
 export class HomePage {
   @ViewChild('title', { read: ElementRef, static: true }) title!: ElementRef;
@@ -19,7 +21,8 @@ export class HomePage {
     private router: Router,
     private alertController: AlertController,
     private authService: AuthService,
-    private storageService: StorageService
+    private storageService: StorageService,
+    private barcodeScanner: BarcodeScanner
   ) {}
 
   async ngOnInit() {
@@ -30,6 +33,7 @@ export class HomePage {
       this.usuario = usuarioGuardado
     }
   }
+  
 
   async logout() {
     await this.storageService.clear();
@@ -91,6 +95,26 @@ export class HomePage {
     });
   
     await alert.present();
+  }
+
+  //Escanear el QR
+
+  async scanQR() {
+    try {
+      const barcodeData = await this.barcodeScanner.scan();
+      if (!barcodeData.cancelled) {
+        console.log('Código escaneado:', barcodeData.text);
+        
+      }
+    } catch (error) {
+      console.error('Error al escanear el QR:', error);
+      const toast = await this.toastController.create({
+        message: 'No se pudo escanear el QR. Inténtalo de nuevo.',
+        duration: 3000,
+        color: 'danger'
+      });
+      toast.present();
+    }
   }
   
   
