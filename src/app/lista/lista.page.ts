@@ -1,5 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { AnimationController, IonContent } from '@ionic/angular';
+import { AnimationController, IonContent, ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { JsonplaceholderService } from '../services/jsonplaceholder.service';
 
@@ -15,18 +15,20 @@ export class ListaPage  {
   currentPage: number = 1;
   itemsPerPage: number = 10;
   paginatedPeople: any[] = [];
-
+  totalPages: number = 0;
+  targetPage: number = 1;
 
   @ViewChild('title', { read: ElementRef, static: true }) title!: ElementRef;
 
   constructor(
     private router: Router,
     private animationCtrl: AnimationController,
-    private jsonPlaceholderService: JsonplaceholderService
+    private jsonPlaceholderService: JsonplaceholderService,
+    private toastController: ToastController
   ) { }
 
-  goToHome(){
-    this.router.navigate(['/home'])
+  goToHome() {
+    this.router.navigate(['/home']);
   }
 
   ngAfterViewInit() {
@@ -49,9 +51,10 @@ export class ListaPage  {
           id: item.id,
           firstName: `Nombre ${item.id}`,
           lastName: `Apellido ${item.id}`,
-          country: 'País Simulado', // Simulamos el país
+          country: 'País Simulado',
           age: Math.floor(Math.random() * (50 - 20 + 1)) + 20
         }));
+        this.totalPages = Math.ceil(this.people.length / this.itemsPerPage);
         this.updatePage();
       },
       (error) => {
@@ -67,7 +70,7 @@ export class ListaPage  {
   }
 
   nextPage() {
-    if (this.currentPage * this.itemsPerPage < this.people.length) {
+    if (this.currentPage < this.totalPages) {
       this.currentPage++;
       this.updatePage();
       this.content.scrollToTop(300);
@@ -82,4 +85,23 @@ export class ListaPage  {
     }
   }
 
+  async goToPage() {
+    if (this.targetPage >= 1 && this.targetPage <= this.totalPages) {
+      this.currentPage = this.targetPage;
+      this.updatePage();
+      this.content.scrollToTop(300);
+    } else {
+      this.showOutOfRangeToast();
+    }
+  }
+
+  async showOutOfRangeToast() {
+    const toast = await this.toastController.create({
+      message: 'Número de página fuera de rango',
+      duration: 2000,
+      color: 'warning',
+      position: 'top'
+    });
+    toast.present();
+  }
 }
