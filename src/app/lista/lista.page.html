@@ -9,7 +9,7 @@
   </ion-header>
 
   <ion-list>
-    <!-- Recorrer y mostrar las publicaciones -->
+
     <ion-item *ngFor="let person of paginatedPeople">
       <ion-label>
         <h2>Nombre: {{ person.firstName }}</h2>
@@ -21,7 +21,7 @@
     </ion-item>
   </ion-list>
 
-  <!-- Controles de paginación -->
+
   <ion-grid>
     <ion-row>
       <ion-col size="6">
@@ -39,6 +39,29 @@
     <ion-row>
       <ion-col size="12" class="ion-text-center">
         Página {{ currentPage }}
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" class="ion-text-center">
+        <ion-input 
+          type="number" 
+          [(ngModel)]="targetPage" 
+          placeholder="Ir a página" 
+          min="1" 
+          [max]="totalPages"
+          class="ion-text-center"
+          style="width: 80px; display: inline-block;">
+        </ion-input>
+        <ion-button (click)="goToPage()">Ir</ion-button>
+      </ion-col>
+    </ion-row>
+    <!-- Mostrar el número de página actual y total de páginas -->
+    <ion-row>
+      <ion-col size="12" class="ion-text-center">
+        Página {{ currentPage }} de {{ totalPages }}
       </ion-col>
     </ion-row>
   </ion-grid>
