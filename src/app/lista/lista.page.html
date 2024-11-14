@@ -18,7 +18,20 @@
         <p>País: {{ person.country }}</p>
         <p>ID: {{ person.id }}</p>
       </ion-label>
+
+      <!--botones-->
+
+    <ion-buttons slot="end">
+      <ion-button color="primary" (click)="editPerson(person)">
+        <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+      </ion-button>
+      <ion-button color="danger" (click)="deletePerson(person)">
+        <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
     </ion-item>
+
+    
   </ion-list>
 
 
