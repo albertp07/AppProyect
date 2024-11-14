@@ -1,5 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { AnimationController, IonContent, ToastController } from '@ionic/angular';
+import { AnimationController, IonContent, ToastController, AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { JsonplaceholderService } from '../services/jsonplaceholder.service';
 
@@ -24,7 +24,8 @@ export class ListaPage  {
     private router: Router,
     private animationCtrl: AnimationController,
     private jsonPlaceholderService: JsonplaceholderService,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private alertController: AlertController
   ) { }
 
   goToHome() {
@@ -51,7 +52,7 @@ export class ListaPage  {
           id: item.id,
           firstName: `Nombre ${item.id}`,
           lastName: `Apellido ${item.id}`,
-          country: 'País Simulado',
+          country: 'Chile',
           age: Math.floor(Math.random() * (50 - 20 + 1)) + 20
         }));
         this.totalPages = Math.ceil(this.people.length / this.itemsPerPage);
@@ -103,5 +104,70 @@ export class ListaPage  {
       position: 'top'
     });
     toast.present();
+  }
+
+  async editPerson(person: any) {
+    const alert = await this.alertController.create({
+      header: 'Editar Usuario',
+      inputs: [
+        {
+          name: 'firstName',
+          type: 'text',
+          placeholder: 'Nombre',
+          value: person.firstName
+        },
+        {
+          name: 'lastName',
+          type: 'text',
+          placeholder: 'Apellido',
+          value: person.lastName
+        },
+        {
+          name: 'age',
+          type: 'number',
+          placeholder: 'Edad',
+          value: person.age
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel'
+        },
+        {
+          text: 'Guardar',
+          handler: (data) => {
+            person.firstName = data.firstName;
+            person.lastName = data.lastName;
+            person.age = data.age;
+            this.updatePage();
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  async deletePerson(person: any) {
+    const alert = await this.alertController.create({
+      header: 'Confirmar eliminación',
+      message: `¿Estás seguro de que deseas eliminar a ${person.firstName} ${person.lastName}?`,
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel'
+        },
+        {
+          text: 'Eliminar',
+          handler: () => {
+            this.people = this.people.filter(p => p.id !== person.id);
+            this.updatePage();
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 }
